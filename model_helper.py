@@ -46,7 +46,8 @@ def predict(image_path):
         trained_model = CarClassifierResNet()
         trained_model.load_state_dict(
             torch.load("model/saved_model.pth",
-                       map_location=torch.device('cpu'))
+                       map_location=torch.device('cpu'),
+                       weights_only=False))
         )
         trained_model.eval()
 
@@ -54,3 +55,4 @@ def predict(image_path):
         output = trained_model(image_tensor)
         _, predicted_class = torch.max(output, 1)
         return class_names[predicted_class.item()]
+        
